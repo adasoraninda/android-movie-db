@@ -5,7 +5,13 @@
       <map>
         <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_add.xml" value="0.2203125" />
         <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_arrow_circle_down.xml" value="0.2203125" />
+        <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.2203125" />
+        <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_check.xml" value="0.2203125" />
+        <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_info.xml" value="0.2203125" />
+        <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2203125" />
         <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_menu.xml" value="0.2203125" />
+        <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_movie.xml" value="0.2203125" />
+        <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/drawable/ic_search.xml" value="0.2203125" />
         <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/layout/fragment_about.xml" value="0.20416666666666666" />
         <entry key="..\:/DATA-DEDA/project/android/MyMovieDb/app/src/main/res/layout/fragment_detail_movie.xml" value="0.20416666666666666" />

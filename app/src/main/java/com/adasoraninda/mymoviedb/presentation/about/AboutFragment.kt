@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.adasoraninda.mymoviedb.databinding.FragmentAboutBinding
-import com.adasoraninda.mymoviedb.databinding.FragmentHomeBinding
 
-class AboutFragment:Fragment() {
+class AboutFragment : Fragment() {
 
-    private var _binding:FragmentAboutBinding? = null
+    private var _binding: FragmentAboutBinding? = null
     private val binding get() = _binding
 
     override fun onCreateView(
@@ -18,7 +17,7 @@ class AboutFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAboutBinding.inflate(inflater,container,false)
+        _binding = FragmentAboutBinding.inflate(inflater, container, false)
         return binding?.root
     }
 

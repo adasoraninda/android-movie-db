@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.adasoraninda.mymoviedb.databinding.FragmentHomeBinding
 import com.adasoraninda.mymoviedb.databinding.FragmentWatchlistBinding
 
 class WatchlistFragment : Fragment() {
@@ -18,7 +17,7 @@ class WatchlistFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentWatchlistBinding.inflate(inflater,container,false)
+        _binding = FragmentWatchlistBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
