@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.imageview.ShapeableImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/image_movie"
+    android:layout_width="128dp"
+    android:layout_height="160dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    app:shapeAppearanceOverlay="@style/ImageCornerRadiusStyle"
+    tools:background="?colorPrimary"
+    tools:ignore="UnusedAttribute"
+    tools:targetApi="m" />

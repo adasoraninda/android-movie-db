@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MyMovieDb</string>
+    <string name="username">Adasoraninda</string>
+    <string name="email">adasoraninda@gmail.com</string>
+
+    <string name="watchlist_title">Watchlist</string>
+
+    <string name="about_title">About</string>
+
+    <string name="list_hr_see_more">See More</string>
+    <string name="list_hr_label_now_playing">Now Playing</string>
+    <string name="list_hr_label_popular">Popular</string>
+    <string name="list_hr_label_top_rated">Top Rated</string>
+
+    <string name="list_vr_title_now_playing">Now Playing</string>
+    <string name="list_vr_title_popular">Popular</string>
+    <string name="list_vr_title_top_rated">Top Rated</string>
+
+    <string name="menu_movies">Movies</string>
+    <string name="menu_watchlist">Watchlist</string>
+    <string name="menu_about">About</string>
+    <string name="menu_search">Search</string>
+
+</resources>

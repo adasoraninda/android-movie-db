@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_movies"
+            android:checked="true"
+            android:icon="@drawable/ic_movie"
+            android:title="@string/menu_movies" />
+
+        <item
+            android:id="@+id/menu_watchlist"
+            android:icon="@drawable/ic_arrow_circle_down"
+            android:title="@string/menu_watchlist" />
+
+        <item
+            android:id="@+id/menu_about"
+            android:icon="@drawable/ic_info"
+            android:title="@string/menu_about" />
+
+    </group>
+
+</menu>

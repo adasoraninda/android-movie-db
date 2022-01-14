@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    tools:ignore="UnusedAttribute"
+    tools:targetApi="m">
+
+    <View
+        android:id="@+id/view_background"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:background="?colorSecondary" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_movie"
+        android:layout_width="84dp"
+        android:layout_height="124dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/view_background"
+        app:layout_constraintEnd_toStartOf="@id/title_movie"
+        app:layout_constraintStart_toStartOf="@id/view_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ImageCornerRadiusStyle"
+        tools:background="?colorPrimary" />
+
+    <TextView
+        android:id="@+id/title_movie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintBottom_toTopOf="@id/overview_movie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_movie"
+        app:layout_constraintTop_toTopOf="@id/view_background"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/overview_movie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@id/image_movie"
+        app:layout_constraintEnd_toEndOf="@id/title_movie"
+        app:layout_constraintStart_toStartOf="@id/title_movie"
+        app:layout_constraintTop_toBottomOf="@id/title_movie"
+        tools:text="@tools:sample/lorem/random" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
