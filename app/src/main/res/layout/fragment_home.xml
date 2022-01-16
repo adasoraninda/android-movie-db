@@ -1,50 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nested_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:orientation="vertical">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+    <LinearLayout
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-        <androidx.core.widget.NestedScrollView
+        <include
+            android:id="@+id/layout_now_paying"
+            layout="@layout/layout_list_horizontal" />
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="12dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+        <include
+            android:id="@+id/layout_popular"
+            layout="@layout/layout_list_horizontal" />
 
-                <include
-                    android:id="@+id/layout_now_paying"
-                    layout="@layout/layout_list_horizontal" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="12dp" />
+        <include
+            android:id="@+id/layout_top_rated"
+            layout="@layout/layout_list_horizontal" />
 
-                <include
-                    android:id="@+id/layout_popular"
-                    layout="@layout/layout_list_horizontal" />
+    </LinearLayout>
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="12dp" />
-
-                <include
-                    android:id="@+id/layout_top_rated"
-                    layout="@layout/layout_list_horizontal" />
-
-            </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
 

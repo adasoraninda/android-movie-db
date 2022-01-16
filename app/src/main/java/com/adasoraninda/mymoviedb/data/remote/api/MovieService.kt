@@ -1,7 +1,6 @@
 package com.adasoraninda.mymoviedb.data.remote.api
 
 import com.adasoraninda.mymoviedb.data.remote.response.MovieDetailResponse
-import com.adasoraninda.mymoviedb.data.remote.response.MoviesResponse
 import com.adasoraninda.mymoviedb.data.remote.response.MoviesResponseWrapper
 import retrofit2.Response
 import retrofit2.http.GET
@@ -16,7 +15,7 @@ interface MovieService {
 
     @GET("/search/movie")
     suspend fun searchMovies(
-        @Query("query") keyword: String?,
+        @Query("query") keyword: String,
     ): Response<MoviesResponseWrapper>
 
     @GET("movie/top_rated")

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:bottom="0dp"
+        android:drawable="?attr/colorSecondary"
+        android:end="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:start="0dp"
+        android:top="0dp"
+        tools:targetApi="m" />
+
+    <item
+        android:bottom="8dp"
+        android:drawable="@drawable/ic_broken_image"
+        android:end="8dp"
+        android:left="8dp"
+        android:right="8dp"
+        android:start="8dp"
+        android:top="8dp"
+        tools:targetApi="m" />
+
+</layer-list>

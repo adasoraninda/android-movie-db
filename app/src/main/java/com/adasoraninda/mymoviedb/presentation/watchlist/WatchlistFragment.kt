@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.adasoraninda.mymoviedb.databinding.FragmentWatchlistBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WatchlistFragment : Fragment() {
 
     private var _binding: FragmentWatchlistBinding? = null

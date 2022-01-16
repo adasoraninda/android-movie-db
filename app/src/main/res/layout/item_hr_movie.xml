@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.imageview.ShapeableImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/image_movie"
-    android:layout_width="128dp"
-    android:layout_height="160dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?selectableItemBackground"
-    app:shapeAppearanceOverlay="@style/ImageCornerRadiusStyle"
-    tools:background="?colorPrimary"
-    tools:ignore="UnusedAttribute"
-    tools:targetApi="m" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_movie"
+        android:layout_width="128dp"
+        android:layout_height="160dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ImageCornerRadiusStyle"
+        tools:background="?colorPrimary"
+        tools:ignore="UnusedAttribute"
+        tools:targetApi="m" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_bar"
+        style="@style/Widget.Material3.CircularProgressIndicator.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        app:trackCornerRadius="4dp" />
+</FrameLayout>
+

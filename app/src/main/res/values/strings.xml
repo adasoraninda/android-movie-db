@@ -20,5 +20,6 @@
     <string name="menu_watchlist">Watchlist</string>
     <string name="menu_about">About</string>
     <string name="menu_search">Search</string>
+    <string name="text_error_get_data">Failed get data</string>
 
 </resources>
