@@ -13,7 +13,7 @@ interface MovieService {
         const val BASE_URL = "https://api.themoviedb.org/3/"
     }
 
-    @GET("/search/movie")
+    @GET("search/movie")
     suspend fun searchMovies(
         @Query("query") keyword: String,
     ): Response<MoviesResponseWrapper>

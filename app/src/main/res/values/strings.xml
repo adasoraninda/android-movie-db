@@ -5,21 +5,31 @@
 
     <string name="watchlist_title">Watchlist</string>
 
+    <string name="popular_title">Popular</string>
+
+    <string name="top_rated_title">Top Rated</string>
+
+    <string name="search_title">Search</string>
+
     <string name="about_title">About</string>
+    <string name="about_description">Description</string>
 
-    <string name="list_hr_see_more">See More</string>
-    <string name="list_hr_label_now_playing">Now Playing</string>
-    <string name="list_hr_label_popular">Popular</string>
-    <string name="list_hr_label_top_rated">Top Rated</string>
-
-    <string name="list_vr_title_now_playing">Now Playing</string>
-    <string name="list_vr_title_popular">Popular</string>
-    <string name="list_vr_title_top_rated">Top Rated</string>
+    <string name="home_text_see_more">See More</string>
+    <string name="home_list_hr_label_now_playing">Now Playing</string>
+    <string name="home_list_hr_label_popular">Popular</string>
+    <string name="home_list_hr_label_top_rated">Top Rated</string>
 
     <string name="menu_movies">Movies</string>
     <string name="menu_watchlist">Watchlist</string>
     <string name="menu_about">About</string>
     <string name="menu_search">Search</string>
+
     <string name="text_error_get_data">Failed get data</string>
+    <string name="text_empty">Empty</string>
+    <string name="text_no_results">No Results</string>
+    <string name="text_empty_watchlist">Empty Watchlist</string>
+    <string name="detail_button_watchlist">Watchlist</string>
+    <string name="detail_text_overview">Overview</string>
+    <string name="detail_text_recommendations">Recommendations</string>
 
 </resources>

@@ -24,5 +24,4 @@ class LocalDataSource @Inject constructor(
     suspend fun delete(movieEntity: MovieEntity): Int {
         return dao.delete(movieEntity)
     }
-
 }

@@ -23,7 +23,7 @@
         android:background="?selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/list_hr_see_more"
+        android:text="@string/home_text_see_more"
         app:drawableEndCompat="@drawable/ic_arrow_forward"
         app:layout_constraintBaseline_toBaselineOf="@id/text_label_movies"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +38,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_movies"
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

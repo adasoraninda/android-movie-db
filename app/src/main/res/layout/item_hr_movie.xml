@@ -7,7 +7,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_movie"
-        android:layout_width="128dp"
+        android:layout_width="120dp"
         android:layout_height="160dp"
         android:clickable="true"
         android:focusable="true"
@@ -26,5 +26,6 @@
         android:layout_gravity="center"
         android:indeterminate="true"
         app:trackCornerRadius="4dp" />
+
 </FrameLayout>
 

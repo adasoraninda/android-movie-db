@@ -3,10 +3,8 @@ package com.adasoraninda.mymoviedb.presentation
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -62,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            Toast.makeText(this, "search", Toast.LENGTH_SHORT).show()
+            navController.navigate(R.id.nav_to_search_movies)
             return true
         }
         return super.onOptionsItemSelected(item)

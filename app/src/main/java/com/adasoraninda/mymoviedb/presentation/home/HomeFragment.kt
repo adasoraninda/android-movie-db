@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.adasoraninda.mymoviedb.R
 import com.adasoraninda.mymoviedb.common.ViewState
 import com.adasoraninda.mymoviedb.common.dp
 import com.adasoraninda.mymoviedb.databinding.FragmentHomeBinding
+import com.adasoraninda.mymoviedb.databinding.LayoutListHorizontalBinding
 import com.adasoraninda.mymoviedb.domain.model.Movie
 import com.adasoraninda.mymoviedb.presentation.adapter.MovieViewHolder
 import com.adasoraninda.mymoviedb.presentation.adapter.MoviesAdapter
@@ -47,114 +49,84 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Timber.d("home life cycle create")
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        Timber.d("home life cycle destroy")
         binding?.layoutNowPaying?.listMovies?.adapter = null
         binding?.layoutTopRated?.listMovies?.adapter = null
         binding?.layoutPopular?.listMovies?.adapter = null
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Timber.d("home life cycle created")
         binding?.layoutNowPaying?.textSeeMore?.visibility = View.INVISIBLE
 
         binding?.layoutNowPaying?.textLabelMovies?.text =
-            getString(R.string.list_hr_label_now_playing)
-        binding?.layoutTopRated?.textLabelMovies?.text = getString(R.string.list_hr_label_top_rated)
-        binding?.layoutPopular?.textLabelMovies?.text = getString(R.string.list_hr_label_popular)
+            getString(R.string.home_list_hr_label_now_playing)
+        binding?.layoutTopRated?.textLabelMovies?.text =
+            getString(R.string.home_list_hr_label_top_rated)
+        binding?.layoutPopular?.textLabelMovies?.text =
+            getString(R.string.home_list_hr_label_popular)
 
         setUpList(binding?.layoutNowPaying?.listMovies, nowPlayingAdapter)
         setUpList(binding?.layoutPopular?.listMovies, popularAdapter)
         setUpList(binding?.layoutTopRated?.listMovies, topRatedAdapter)
 
         binding?.layoutPopular?.textSeeMore?.setOnClickListener {
-
+            findNavController().navigate(R.id.nav_to_popular_movies)
         }
-        binding?.layoutTopRated?.textSeeMore?.setOnClickListener {
 
+        binding?.layoutTopRated?.textSeeMore?.setOnClickListener {
+            findNavController().navigate(R.id.nav_to_top_rated_movies)
         }
 
         viewModel.nowPlayingState.observe(viewLifecycleOwner) { state ->
             val layout = binding?.layoutNowPaying
-
-            when (state) {
-                is ViewState.Error -> {
-                    layout?.progressBar?.isVisible = false
-                    layout?.textError?.isVisible = true
-                    layout?.textError?.text = getString(state.message)
-                    layout?.listMovies?.isVisible = false
-                }
-                ViewState.Loading -> {
-                    layout?.progressBar?.isVisible = true
-                    layout?.textError?.isVisible = false
-                    layout?.listMovies?.isVisible = true
-                    nowPlayingAdapter.submitList(emptyList())
-                }
-                is ViewState.Success -> {
-                    Timber.d("now playing: ${state.data}")
-                    layout?.progressBar?.isVisible = false
-                    layout?.textError?.isVisible = false
-                    layout?.listMovies?.isVisible = true
-                    nowPlayingAdapter.submitList(state.data)
-                }
-            }
+            handleState(state, layout, nowPlayingAdapter)
         }
 
         viewModel.topRatedState.observe(viewLifecycleOwner) { state ->
             val layout = binding?.layoutTopRated
-
-            when (state) {
-                is ViewState.Error -> {
-                    layout?.progressBar?.isVisible = false
-                    layout?.textError?.isVisible = true
-                    layout?.textError?.text = getString(state.message)
-                    layout?.listMovies?.isVisible = false
-                }
-                ViewState.Loading -> {
-                    layout?.progressBar?.isVisible = true
-                    layout?.textError?.isVisible = false
-                    layout?.listMovies?.isVisible = true
-                    topRatedAdapter.submitList(emptyList())
-                }
-                is ViewState.Success -> {
-                    Timber.d("top rated: ${state.data}")
-                    layout?.progressBar?.isVisible = false
-                    layout?.textError?.isVisible = false
-                    layout?.listMovies?.isVisible = true
-                    topRatedAdapter.submitList(state.data)
-                }
-            }
+            handleState(state, layout, topRatedAdapter)
         }
 
         viewModel.popularState.observe(viewLifecycleOwner) { state ->
             val layout = binding?.layoutPopular
+            handleState(state, layout, popularAdapter)
+        }
+    }
 
-            when (state) {
-                is ViewState.Error -> {
-                    layout?.progressBar?.isVisible = false
-                    layout?.textError?.isVisible = true
-                    layout?.textError?.text = getString(state.message)
-                    layout?.listMovies?.isVisible = false
-                }
-                ViewState.Loading -> {
-                    layout?.progressBar?.isVisible = true
-                    layout?.textError?.isVisible = false
-                    layout?.listMovies?.isVisible = true
-                    popularAdapter.submitList(emptyList())
-                }
-                is ViewState.Success -> {
-                    Timber.d("popular: ${state.data}")
-                    layout?.progressBar?.isVisible = false
-                    layout?.textError?.isVisible = false
-                    layout?.listMovies?.isVisible = true
-                    popularAdapter.submitList(state.data)
-                }
+    private fun handleState(
+        state: ViewState<List<Movie>>,
+        layout: LayoutListHorizontalBinding?,
+        adapter: ListAdapter<Movie, MovieViewHolder<out ViewBinding>>
+    ) {
+        when (state) {
+            is ViewState.Error -> {
+                layout?.progressBar?.isVisible = false
+                layout?.textError?.isVisible = true
+                layout?.textError?.text = getString(state.message)
+                layout?.listMovies?.isVisible = false
+            }
+            ViewState.Loading -> {
+                layout?.progressBar?.isVisible = true
+                layout?.textError?.isVisible = false
+                layout?.listMovies?.isVisible = true
+                adapter.submitList(emptyList())
+            }
+            is ViewState.Success -> {
+                Timber.d("data: ${state.data}")
+                layout?.progressBar?.isVisible = false
+                layout?.textError?.isVisible = false
+                layout?.listMovies?.isVisible = true
+                adapter.submitList(state.data)
             }
         }
     }
@@ -163,6 +135,7 @@ class HomeFragment : Fragment() {
         list: RecyclerView?,
         adapter: ListAdapter<Movie, MovieViewHolder<out ViewBinding>>
     ) {
+        Timber.d("setup list")
         list?.adapter = adapter
         list?.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -171,6 +144,5 @@ class HomeFragment : Fragment() {
         )
         list?.setHasFixedSize(true)
     }
-
 
 }

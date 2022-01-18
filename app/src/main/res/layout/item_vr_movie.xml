@@ -14,8 +14,8 @@
         android:id="@+id/view_background"
         android:layout_width="match_parent"
         android:layout_height="84dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:background="?colorSecondary" />
+        android:background="@drawable/bg_corner_shape_image"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_movie"

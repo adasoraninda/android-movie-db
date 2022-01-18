@@ -12,7 +12,7 @@
 
     <style name="Theme.MyMovieDb.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
-        <item name="windowSplashScreenBackground">?colorPrimary</item>
+        <item name="windowSplashScreenBackground">@color/purple_500</item>
         <item name="postSplashScreenTheme">@style/Theme.MyMovieDb</item>
     </style>
 
