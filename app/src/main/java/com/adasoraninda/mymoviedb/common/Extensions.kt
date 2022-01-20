@@ -9,8 +9,21 @@ import coil.request.ImageRequest
 import coil.request.ImageResult
 import com.adasoraninda.mymoviedb.R
 
-fun ImageView.loadWithLoading(url: String?,progressBar: ProgressBar) {
-    val listener = object : ImageRequest.Listener{
+fun Float.toRate5(): Float {
+    return ((this / 10) * 5)
+}
+
+fun Int.toHourMinute(): String {
+    val hour = this / 60
+    val minutes = this % 60
+    return "${hour}h ${minutes}m"
+}
+
+val Int.dp: Int
+    get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+
+fun ImageView.loadWithLoading(url: String?, progressBar: ProgressBar) {
+    val listener = object : ImageRequest.Listener {
         override fun onStart(request: ImageRequest) {
             super.onStart(request)
             progressBar.isVisible = true
@@ -34,5 +47,3 @@ fun ImageView.loadWithLoading(url: String?,progressBar: ProgressBar) {
     }
 }
 
-val Int.dp: Int
-    get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()

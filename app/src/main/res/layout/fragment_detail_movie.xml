@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:parentTag="androidx.coordinatorlayout.widget.CoordinatorLayout">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/image_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerCrop"
         tools:ignore="ContentDescription"
         tools:src="?colorPrimary" />
 
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        tools:background="@color/white">
+        android:background="@color/white">
 
         <include
             android:id="@+id/layout_bottom_sheet"
@@ -45,4 +45,4 @@
         tools:text="error"
         tools:visibility="visible" />
 
-</merge>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

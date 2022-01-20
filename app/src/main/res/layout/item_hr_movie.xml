@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    tools:ignore="UnusedAttribute"
+    tools:targetApi="m">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_movie"
         android:layout_width="120dp"
         android:layout_height="160dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?selectableItemBackground"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/ImageCornerRadiusStyle"
-        tools:background="?colorPrimary"
-        tools:ignore="UnusedAttribute"
-        tools:targetApi="m" />
+        tools:background="?colorPrimary" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress_bar"

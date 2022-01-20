@@ -10,6 +10,7 @@
     <View
         android:layout_width="48dp"
         android:layout_height="6dp"
+        android:layerType="software"
         android:layout_gravity="center"
         android:background="@drawable/bg_corner_shape_modal" />
 
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 tools:text="@tools:sample/lorem/random" />
 
             <Button
@@ -53,6 +54,14 @@
                 android:maxLines="2"
                 tools:text="@tools:sample/lorem/random" />
 
+            <TextView
+                android:id="@+id/text_run_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="@tools:sample/lorem/random" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +74,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:numStars="5"
-                    android:stepSize="1"
                     tools:rating="4" />
 
                 <Space
@@ -86,13 +94,14 @@
                 android:layout_height="16dp" />
 
             <TextView
+                android:id="@+id/text_label_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/detail_text_overview"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
             <TextView
-                android:id="@+id/text_movie_description"
+                android:id="@+id/text_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
@@ -103,10 +112,21 @@
                 android:layout_height="16dp" />
 
             <TextView
+                android:id="@+id/text_label_recommendations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/detail_text_recommendations"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+            <TextView
+                android:id="@+id/text_error_recommendations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:visibility="gone"
+                tools:text="@tools:sample/lorem/random"
+                tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_movies"

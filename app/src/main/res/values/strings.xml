@@ -28,8 +28,10 @@
     <string name="text_empty">Empty</string>
     <string name="text_no_results">No Results</string>
     <string name="text_empty_watchlist">Empty Watchlist</string>
+
     <string name="detail_button_watchlist">Watchlist</string>
     <string name="detail_text_overview">Overview</string>
     <string name="detail_text_recommendations">Recommendations</string>
-
+    <string name="detail_alert_add_movie">Add Movie</string>
+    <string name="detail_alert_remove_movie">Remove Movie</string>
 </resources>

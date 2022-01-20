@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,15 +32,15 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding
 
     private val nowPlayingAdapter by lazy {
-        MoviesAdapter(MoviesAdapter.Type.HORIZONTAL)
+        MoviesAdapter(MoviesAdapter.Type.HORIZONTAL, this::navigateToDetail)
     }
 
     private val topRatedAdapter by lazy {
-        MoviesAdapter(MoviesAdapter.Type.HORIZONTAL)
+        MoviesAdapter(MoviesAdapter.Type.HORIZONTAL, this::navigateToDetail)
     }
 
     private val popularAdapter by lazy {
-        MoviesAdapter(MoviesAdapter.Type.HORIZONTAL)
+        MoviesAdapter(MoviesAdapter.Type.HORIZONTAL, this::navigateToDetail)
     }
 
     private val viewModel: HomeViewModel by viewModels()
@@ -103,6 +104,14 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun navigateToDetail(id: Int) {
+        val directions = HomeFragmentDirections.navToDetail()
+
+        findNavController().navigate(
+            directions.setMovieId(id)
+        )
+    }
+
     private fun handleState(
         state: ViewState<List<Movie>>,
         layout: LayoutListHorizontalBinding?,
@@ -133,16 +142,21 @@ class HomeFragment : Fragment() {
 
     private fun setUpList(
         list: RecyclerView?,
-        adapter: ListAdapter<Movie, MovieViewHolder<out ViewBinding>>
+        adapter: MoviesAdapter
     ) {
         Timber.d("setup list")
         list?.adapter = adapter
-        list?.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        list?.setHasFixedSize(true)
+
+        list?.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+
         list?.addItemDecoration(
             ListHorizontalDecorator(middle = 8.dp)
         )
-        list?.setHasFixedSize(true)
     }
 
 }

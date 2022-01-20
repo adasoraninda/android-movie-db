@@ -9,14 +9,24 @@ import com.adasoraninda.mymoviedb.databinding.ItemVrMovieBinding
 import com.adasoraninda.mymoviedb.domain.model.Movie
 import timber.log.Timber
 
-abstract class MovieViewHolder<T : ViewBinding>(open val binding: T) :
-    RecyclerView.ViewHolder(binding.root) {
-    abstract fun bind(movie: Movie)
+abstract class MovieViewHolder<T : ViewBinding>(
+    open val binding: T,
+    private val clickListener: ((id: Int) -> Unit)?
+) : RecyclerView.ViewHolder(binding.root) {
+    open fun bind(movie: Movie) {
+        binding.root.setOnClickListener {
+            Timber.d("item clicked")
+            clickListener?.invoke(movie.id)
+        }
+    }
 }
 
-class MovieVrViewHolder(binding: ItemVrMovieBinding) :
-    MovieViewHolder<ItemVrMovieBinding>(binding) {
+class MovieVrViewHolder(
+    binding: ItemVrMovieBinding,
+    clickListener: ((id: Int) -> Unit)?
+) : MovieViewHolder<ItemVrMovieBinding>(binding, clickListener) {
     override fun bind(movie: Movie) {
+        super.bind(movie)
         Timber.d("$movie")
         val context = binding.root.context
 
@@ -35,9 +45,12 @@ class MovieVrViewHolder(binding: ItemVrMovieBinding) :
     }
 }
 
-class MovieHrViewHolder(binding: ItemHrMovieBinding) :
-    MovieViewHolder<ItemHrMovieBinding>(binding) {
+class MovieHrViewHolder(
+    binding: ItemHrMovieBinding,
+    clickListener: ((id: Int) -> Unit)?
+) : MovieViewHolder<ItemHrMovieBinding>(binding, clickListener) {
     override fun bind(movie: Movie) {
+        super.bind(movie)
         Timber.d("$movie")
 
         binding.imageMovie.loadWithLoading(

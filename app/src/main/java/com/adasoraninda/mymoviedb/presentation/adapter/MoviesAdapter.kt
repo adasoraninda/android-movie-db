@@ -11,7 +11,8 @@ import com.adasoraninda.mymoviedb.domain.model.Movie
 import timber.log.Timber
 
 class MoviesAdapter(
-    private val type: Type
+    private val type: Type,
+    private var clickListener: ((id: Int) -> Unit)? = null
 ) : ListAdapter<Movie, MovieViewHolder<out ViewBinding>>(DIFF_UTIL) {
 
     override fun onCreateViewHolder(
@@ -22,11 +23,11 @@ class MoviesAdapter(
         return when (type) {
             Type.HORIZONTAL -> {
                 val binding = ItemHrMovieBinding.inflate(inflater, parent, false)
-                MovieHrViewHolder(binding)
+                MovieHrViewHolder(binding, clickListener)
             }
             Type.VERTICAL -> {
                 val binding = ItemVrMovieBinding.inflate(inflater, parent, false)
-                MovieVrViewHolder(binding)
+                MovieVrViewHolder(binding, clickListener)
             }
         }
     }

@@ -37,4 +37,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindSearchMoviesUseCase(useCase: SearchMoviesUseCase): SearchMoviesInteractor
+
+    @Binds
+    fun bindGetMovieStatusByIdUseCase(useCase: GetMovieStatusByIdUseCase): GetMovieStatusByIdInteractor
 }
