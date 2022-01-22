@@ -1,16 +1,13 @@
 package com.adasoraninda.mymoviedb.presentation.detail
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import com.adasoraninda.mymoviedb.R
+import com.adasoraninda.mymoviedb.common.SingleLiveData
 import com.adasoraninda.mymoviedb.common.ViewState
 import com.adasoraninda.mymoviedb.domain.interactor.*
 import com.adasoraninda.mymoviedb.domain.model.Movie
 import com.adasoraninda.mymoviedb.domain.model.MovieDetail
 import com.adasoraninda.mymoviedb.domain.model.toMovieDomain
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -34,21 +31,20 @@ class DetailViewModel @Inject constructor(
     private val _movieRecommendations = MutableLiveData<ViewState<List<Movie>>>()
     val movieRecommendations: LiveData<ViewState<List<Movie>>> get() = _movieRecommendations
 
-    @StringRes
-    var watchlistMessage: Int? = null
-        private set
+    private val _message = SingleLiveData<Int>()
+    val message: LiveData<Int> get() = _message
 
     fun toggleWatchlistButton() {
         viewModelScope.launch {
             val movie = (_movie.value as? ViewState.Success)?.data?.toMovieDomain() ?: return@launch
             val status = _status.value ?: false
 
-            watchlistMessage = if (status) {
+            if (status) {
                 useCaseRemoveWatchlist(movie)
-                R.string.detail_alert_remove_movie
+                _message.value = R.string.detail_alert_remove_movie
             } else {
                 useCaseSaveWatchlist(movie)
-                R.string.detail_alert_add_movie
+                _message.value = R.string.detail_alert_add_movie
             }
         }
     }
@@ -86,10 +82,10 @@ class DetailViewModel @Inject constructor(
             useCaseRecommendations(id).collect { result ->
                 result.fold(
                     onSuccess = { movies ->
-                        if (movies.isNotEmpty()) {
-                            _movieRecommendations.value = ViewState.Success(data = movies)
-                        } else {
+                        if (movies.isEmpty()) {
                             _movieRecommendations.value = ViewState.Error(R.string.text_empty)
+                        } else {
+                            _movieRecommendations.value = ViewState.Success(data = movies)
                         }
                     },
                     onFailure = {

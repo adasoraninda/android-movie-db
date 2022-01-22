@@ -33,9 +33,13 @@ class HomeViewModel @Inject constructor(
     val topRatedState: LiveData<ViewState<List<Movie>>> get() = _topRatedState
 
     init {
-        fetchNowPlayingData()
-        fetchPopularData()
+        fetchData()
+    }
+
+    fun fetchData() {
         fetchTopRatedData()
+        fetchPopularData()
+        fetchNowPlayingData()
     }
 
     private fun fetchNowPlayingData() {

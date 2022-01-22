@@ -43,6 +43,7 @@ fun ImageView.loadWithLoading(url: String?, progressBar: ProgressBar) {
     load("${Constant.imageFormat}$url") {
         crossfade(true)
         error(R.drawable.ic_error_image)
+        placeholder(R.color.teal_200)
         listener(listener)
     }
 }

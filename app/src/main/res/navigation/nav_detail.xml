@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_detail"
+    tools:ignore="InvalidNavigation">
+
+    <fragment
+        android:id="@+id/fragment_popular"
+        android:name="com.adasoraninda.mymoviedb.presentation.categories.popular.PopularFragment"
+        android:label="@string/popular_title"
+        tools:layout="@layout/fragment_list_movies">
+
+        <deepLink app:uri="android-app://com.adasoraninda.mymoviedb/popular" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_top_rated"
+        android:name="com.adasoraninda.mymoviedb.presentation.categories.toprated.TopRatedFragment"
+        android:label="@string/top_rated_title"
+        tools:layout="@layout/fragment_list_movies">
+
+        <deepLink app:uri="android-app://com.adasoraninda.mymoviedb/top" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_detail"
+        android:name="com.adasoraninda.mymoviedb.presentation.detail.DetailFragment"
+        tools:layout="@layout/fragment_detail_movie">
+
+        <action
+            android:id="@+id/nav_to_detail"
+            app:destination="@id/fragment_detail"
+            app:launchSingleTop="true" />
+
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+
+        <deepLink app:uri="android-app://com.adasoraninda.mymoviedb/detail/{movieId}" />
+
+    </fragment>
+
+</navigation>

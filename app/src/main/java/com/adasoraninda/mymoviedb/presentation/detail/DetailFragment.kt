@@ -8,6 +8,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
@@ -17,6 +18,8 @@ import com.adasoraninda.mymoviedb.databinding.FragmentDetailMovieBinding
 import com.adasoraninda.mymoviedb.domain.model.MovieDetail
 import com.adasoraninda.mymoviedb.presentation.adapter.MoviesAdapter
 import com.adasoraninda.mymoviedb.presentation.decorator.ListHorizontalDecorator
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.SAVE_PEEK_HEIGHT
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -32,7 +35,7 @@ class DetailFragment : Fragment() {
     private val viewModel: DetailViewModel by viewModels()
 
     private val listAdapter by lazy {
-        MoviesAdapter(MoviesAdapter.Type.HORIZONTAL)
+        MoviesAdapter(MoviesAdapter.Type.HORIZONTAL, this::navigateToDetail)
     }
 
     override fun onCreateView(
@@ -51,7 +54,14 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpList()
-        buttonListener()
+        setUpBottomSheet()
+        buttonClickListener()
+
+        viewModel.message.observe(viewLifecycleOwner) { message ->
+            binding?.root?.let {
+                Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show()
+            }
+        }
 
         viewModel.movie.observe(viewLifecycleOwner) { state ->
             val layout = binding?.layoutBottomSheet
@@ -82,22 +92,23 @@ class DetailFragment : Fragment() {
 
             when (state) {
                 is ViewState.Error -> {
+                    layout?.progressBarRecommendations?.isVisible = false
                     layout?.textLabelRecommendations?.isVisible = true
                     layout?.textErrorRecommendations?.isVisible = true
-                    layout?.listMovies?.isVisible = false
                     layout?.textErrorRecommendations?.text = getString(state.message)
+                    listAdapter.submitList(emptyList())
                 }
                 ViewState.Loading -> {
+                    layout?.progressBarRecommendations?.isVisible = true
                     layout?.textLabelRecommendations?.isVisible = false
                     layout?.textErrorRecommendations?.isVisible = false
-                    layout?.listMovies?.isVisible = false
                     listAdapter.submitList(emptyList())
                 }
                 is ViewState.Success -> {
-                    Timber.d("${state.data}")
+                    Timber.d("recommendations: ${state.data}")
+                    layout?.progressBarRecommendations?.isVisible = false
                     layout?.textLabelRecommendations?.isVisible = true
                     layout?.textErrorRecommendations?.isVisible = false
-                    layout?.listMovies?.isVisible = true
                     listAdapter.submitList(state.data)
                 }
             }
@@ -109,31 +120,42 @@ class DetailFragment : Fragment() {
 
     }
 
+    private fun setUpBottomSheet() {
+        val view = binding?.movieBottomSheet ?: return
+
+        val screenHeight = resources.displayMetrics.heightPixels
+        val percent = 24
+        val getPercentageFromHeight = (screenHeight * percent / 100)
+        val buttonBackHeight = binding?.buttonImageBack?.drawable?.intrinsicHeight ?: 0
+
+        val bottomSheetBehavior = BottomSheetBehavior.from(view)
+
+        bottomSheetBehavior.isDraggable = true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        bottomSheetBehavior.peekHeight = getPercentageFromHeight
+        bottomSheetBehavior.saveFlags = SAVE_PEEK_HEIGHT
+        bottomSheetBehavior.maxHeight = screenHeight - buttonBackHeight.dp
+
+        Timber.d("display height size: $screenHeight")
+        Timber.d("$percent% from height size: $getPercentageFromHeight")
+        Timber.d("buttonBackHeight: $buttonBackHeight")
+
+    }
+
     private fun setUpList() {
-        val layout = binding?.layoutBottomSheet
+        Timber.d("setup list")
+        val list = binding?.layoutBottomSheet?.listMovies
 
-        layout?.listMovies?.adapter = listAdapter
-
-        layout?.listMovies?.setHasFixedSize(true)
-
-        layout?.listMovies?.addItemDecoration(
-            ListHorizontalDecorator(middle = 8.dp)
-        )
-
-        layout?.listMovies?.layoutManager = LinearLayoutManager(
+        list?.adapter = listAdapter
+        list?.layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.HORIZONTAL,
             false
         )
-
-    }
-
-    private fun buttonListener() {
-        val layout = binding?.layoutBottomSheet
-
-        layout?.buttonWatchlist?.setOnClickListener {
-            viewModel.toggleWatchlistButton()
-        }
+        list?.addItemDecoration(
+            ListHorizontalDecorator(middle = 8.dp)
+        )
+        list?.setHasFixedSize(true)
     }
 
     private fun setData(data: MovieDetail) {
@@ -168,7 +190,22 @@ class DetailFragment : Fragment() {
             AppCompatResources.getDrawable(requireContext(), R.drawable.ic_add)
         }
 
-        button?.setCompoundDrawables(drawable, null, null, null)
+        button?.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+    }
+
+    private fun buttonClickListener() {
+        binding?.buttonImageBack?.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding?.layoutBottomSheet?.buttonWatchlist?.setOnClickListener {
+            viewModel.toggleWatchlistButton()
+        }
+    }
+
+    private fun navigateToDetail(id: Int) {
+        val action = DetailFragmentDirections.navToDetail(id)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

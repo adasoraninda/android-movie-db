@@ -4,22 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.adasoraninda.mymoviedb.R
+import com.adasoraninda.mymoviedb.common.Constant
 import com.adasoraninda.mymoviedb.common.ViewState
 import com.adasoraninda.mymoviedb.common.dp
 import com.adasoraninda.mymoviedb.databinding.FragmentHomeBinding
 import com.adasoraninda.mymoviedb.databinding.LayoutListHorizontalBinding
 import com.adasoraninda.mymoviedb.domain.model.Movie
-import com.adasoraninda.mymoviedb.presentation.adapter.MovieViewHolder
 import com.adasoraninda.mymoviedb.presentation.adapter.MoviesAdapter
 import com.adasoraninda.mymoviedb.presentation.decorator.ListHorizontalDecorator
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,11 +80,19 @@ class HomeFragment : Fragment() {
         setUpList(binding?.layoutTopRated?.listMovies, topRatedAdapter)
 
         binding?.layoutPopular?.textSeeMore?.setOnClickListener {
-            findNavController().navigate(R.id.nav_to_popular_movies)
+            val request = NavDeepLinkRequest.Builder
+                .fromUri("${Constant.pathDestination}/popular".toUri())
+                .build()
+
+            findNavController().navigate(request)
         }
 
         binding?.layoutTopRated?.textSeeMore?.setOnClickListener {
-            findNavController().navigate(R.id.nav_to_top_rated_movies)
+            val request = NavDeepLinkRequest.Builder
+                .fromUri("${Constant.pathDestination}/top".toUri())
+                .build()
+
+            findNavController().navigate(request)
         }
 
         viewModel.nowPlayingState.observe(viewLifecycleOwner) { state ->
@@ -105,17 +112,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToDetail(id: Int) {
-        val directions = HomeFragmentDirections.navToDetail()
+        val request = NavDeepLinkRequest.Builder
+            .fromUri("${Constant.pathDestination}/detail/$id".toUri())
+            .build()
 
-        findNavController().navigate(
-            directions.setMovieId(id)
-        )
+        findNavController().navigate(request)
     }
 
     private fun handleState(
         state: ViewState<List<Movie>>,
         layout: LayoutListHorizontalBinding?,
-        adapter: ListAdapter<Movie, MovieViewHolder<out ViewBinding>>
+        adapter: MoviesAdapter
     ) {
         when (state) {
             is ViewState.Error -> {
@@ -146,17 +153,15 @@ class HomeFragment : Fragment() {
     ) {
         Timber.d("setup list")
         list?.adapter = adapter
-        list?.setHasFixedSize(true)
-
         list?.layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.HORIZONTAL,
             false
         )
-
         list?.addItemDecoration(
             ListHorizontalDecorator(middle = 8.dp)
         )
+        list?.setHasFixedSize(true)
     }
 
 }

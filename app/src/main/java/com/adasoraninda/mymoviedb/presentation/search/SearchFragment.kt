@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.adasoraninda.mymoviedb.common.Constant
 import com.adasoraninda.mymoviedb.common.ViewState
 import com.adasoraninda.mymoviedb.common.dp
 import com.adasoraninda.mymoviedb.databinding.FragmentSearchBinding
@@ -24,7 +28,7 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding
 
     private val listAdapter by lazy {
-        MoviesAdapter(MoviesAdapter.Type.VERTICAL)
+        MoviesAdapter(MoviesAdapter.Type.VERTICAL, this::navigateToDetail)
     }
 
     private val viewModel: SearchViewModel by viewModels()
@@ -80,6 +84,14 @@ class SearchFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun navigateToDetail(id: Int) {
+        val request = NavDeepLinkRequest.Builder
+            .fromUri("${Constant.pathDestination}/detail/$id".toUri())
+            .build()
+
+        findNavController().navigate(request)
     }
 
     private fun setUpList() {
