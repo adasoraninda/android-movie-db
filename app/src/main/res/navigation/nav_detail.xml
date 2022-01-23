@@ -33,7 +33,11 @@
         <action
             android:id="@+id/nav_to_detail"
             app:destination="@id/fragment_detail"
-            app:launchSingleTop="true" />
+            app:enterAnim="@anim/anim_in_left"
+            app:exitAnim="@anim/anim_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/anim_in_right"
+            app:popExitAnim="@anim/anim_out_right" />
 
         <argument
             android:name="movieId"

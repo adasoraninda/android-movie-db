@@ -9,8 +9,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.adasoraninda.mymoviedb.R
 import com.adasoraninda.mymoviedb.common.Constant
 import com.adasoraninda.mymoviedb.common.ViewState
 import com.adasoraninda.mymoviedb.common.dp
@@ -76,7 +78,14 @@ class WatchlistFragment : Fragment() {
             .fromUri("${Constant.pathDestination}/detail/$id".toUri())
             .build()
 
-        findNavController().navigate(request)
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.anim_in_left)
+            .setExitAnim(R.anim.anim_out_left)
+            .setPopEnterAnim(R.anim.anim_in_right)
+            .setPopExitAnim(R.anim.anim_out_right)
+            .build()
+
+        findNavController().navigate(request,navOptions)
     }
 
     private fun setUpList() {

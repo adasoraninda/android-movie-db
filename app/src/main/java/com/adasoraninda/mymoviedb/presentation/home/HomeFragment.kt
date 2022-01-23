@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -80,19 +81,11 @@ class HomeFragment : Fragment() {
         setUpList(binding?.layoutTopRated?.listMovies, topRatedAdapter)
 
         binding?.layoutPopular?.textSeeMore?.setOnClickListener {
-            val request = NavDeepLinkRequest.Builder
-                .fromUri("${Constant.pathDestination}/popular".toUri())
-                .build()
-
-            findNavController().navigate(request)
+            navToDeepLinking("/popular")
         }
 
         binding?.layoutTopRated?.textSeeMore?.setOnClickListener {
-            val request = NavDeepLinkRequest.Builder
-                .fromUri("${Constant.pathDestination}/top".toUri())
-                .build()
-
-            findNavController().navigate(request)
+            navToDeepLinking("/top")
         }
 
         viewModel.nowPlayingState.observe(viewLifecycleOwner) { state ->
@@ -112,11 +105,22 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToDetail(id: Int) {
+        navToDeepLinking("/detail/$id")
+    }
+
+    private fun navToDeepLinking(destination: String) {
         val request = NavDeepLinkRequest.Builder
-            .fromUri("${Constant.pathDestination}/detail/$id".toUri())
+            .fromUri("${Constant.pathDestination}$destination".toUri())
             .build()
 
-        findNavController().navigate(request)
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.anim_in_left)
+            .setExitAnim(R.anim.anim_out_left)
+            .setPopEnterAnim(R.anim.anim_in_right)
+            .setPopExitAnim(R.anim.anim_out_right)
+            .build()
+
+        findNavController().navigate(request, navOptions)
     }
 
     private fun handleState(
