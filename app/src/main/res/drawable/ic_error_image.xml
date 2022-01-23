@@ -13,13 +13,13 @@
         tools:targetApi="m" />
 
     <item
-        android:bottom="8dp"
+        android:bottom="16dp"
         android:drawable="@drawable/ic_broken_image"
-        android:end="8dp"
-        android:left="8dp"
-        android:right="8dp"
-        android:start="8dp"
-        android:top="8dp"
+        android:end="16dp"
+        android:left="16dp"
+        android:right="16dp"
+        android:start="16dp"
+        android:top="16dp"
         tools:targetApi="m" />
 
 </layer-list>

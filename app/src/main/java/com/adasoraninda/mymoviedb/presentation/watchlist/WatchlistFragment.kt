@@ -39,13 +39,14 @@ class WatchlistFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Timber.d("watchlist life cycle: create")
         _binding = FragmentWatchlistBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Timber.d("watchlist life cycle: created")
         setUpList()
 
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
@@ -98,11 +99,11 @@ class WatchlistFragment : Fragment() {
                 leftAndRight = 16.dp
             )
         )
-        binding?.listMovies?.setHasFixedSize(true)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Timber.d("watchlist life cycle: destroy")
         binding?.listMovies?.adapter = null
         _binding = null
 

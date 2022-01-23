@@ -36,7 +36,7 @@ class HomeViewModel @Inject constructor(
         fetchData()
     }
 
-    fun fetchData() {
+    private fun fetchData() {
         fetchTopRatedData()
         fetchPopularData()
         fetchNowPlayingData()

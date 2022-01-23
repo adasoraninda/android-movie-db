@@ -157,15 +157,14 @@ class HomeFragment : Fragment() {
     ) {
         Timber.d("setup list")
         list?.adapter = adapter
-        list?.layoutManager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
         list?.addItemDecoration(
             ListHorizontalDecorator(middle = 8.dp)
         )
-        list?.setHasFixedSize(true)
+        list?.layoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.HORIZONTAL,
+            false
+        )
     }
 
 }

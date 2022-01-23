@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.adasoraninda.mymoviedb.R
 import com.adasoraninda.mymoviedb.common.*
@@ -139,7 +140,6 @@ class DetailFragment : Fragment() {
         Timber.d("display height size: $screenHeight")
         Timber.d("$percent% from height size: $getPercentageFromHeight")
         Timber.d("buttonBackHeight: $buttonBackHeight")
-
     }
 
     private fun setUpList() {
@@ -149,13 +149,12 @@ class DetailFragment : Fragment() {
         list?.adapter = listAdapter
         list?.layoutManager = LinearLayoutManager(
             requireContext(),
-            LinearLayoutManager.HORIZONTAL,
+            RecyclerView.HORIZONTAL,
             false
         )
         list?.addItemDecoration(
             ListHorizontalDecorator(middle = 8.dp)
         )
-        list?.setHasFixedSize(true)
     }
 
     private fun setData(data: MovieDetail) {
@@ -177,6 +176,7 @@ class DetailFragment : Fragment() {
 
         binding?.imageMovie?.load("${Constant.imageFormat}${data.posterPath}") {
             crossfade(true)
+            error(R.drawable.ic_error_image)
             placeholder(R.color.teal_200)
         }
     }

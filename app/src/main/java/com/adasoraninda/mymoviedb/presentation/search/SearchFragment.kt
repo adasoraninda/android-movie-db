@@ -113,7 +113,6 @@ class SearchFragment : Fragment() {
                 leftAndRight = 16.dp
             )
         )
-        binding?.listMovies?.setHasFixedSize(true)
     }
 
     override fun onDestroyView() {
